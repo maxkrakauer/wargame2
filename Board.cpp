@@ -96,6 +96,11 @@ namespace WarGame{
         {
             other_player=1;
         }
+
+        Soldier * combatant = board[location.first][location.second];
+
+        if(combatant->_soltype!=Soldier::soltype::sniper && 
+        combatant->_soltype!=Soldier::soltype::snipercom){
         
 
         int dir;
@@ -117,6 +122,63 @@ namespace WarGame{
         
         dir=(rand() % 4) + 1;
         
+        
+    
+
+        //cout<<"dir is: "<<dir<<endl;
+        //cout<<"before dir==1"<<endl;
+
+        if(dir==1 && !one && location.first+1<board.size() && 
+        this->board[location.first+1][location.second]!=nullptr) 
+        {
+            place.first=location.first+1;
+            place.second=location.second;
+            chosen=this->board[location.first][location.second]->act(this->board[place.first][place.second]);
+            if(this->board[place.first][place.second]->_points<=0){
+                this->board[place.first][place.second]=nullptr; 
+            }
+            cout<<"atacking upward"<<endl;
+        }
+
+
+        if(dir==2 && !two && location.first-1<board.size() && 
+        this->board[location.first-1][location.second]!=nullptr)
+        {
+            place.first=location.first-1;
+            place.second=location.second;
+            chosen=this->board[location.first][location.second]->act(this->board[place.first][place.second]);
+              if(this->board[place.first][place.second]->_points<=0){
+                this->board[place.first][place.second]=nullptr; 
+            }
+            cout<<"atacking downward"<<endl;
+        }
+
+
+        if(dir==3 && !three && location.second+1<board[0].size() && 
+        this->board[location.first][location.second+1]!=nullptr)
+        {
+            place.first=location.first;
+            place.second=location.second+1;
+            chosen=this->board[location.first][location.second]->act(this->board[place.first][place.second]);
+            if(this->board[place.first][place.second]->_points<=0){
+                this->board[place.first][place.second]=nullptr; 
+            }
+            cout<<"atacking to the right"<<endl;
+        }
+
+
+        if(dir==4 && !four && location.second-1<board[0].size() && 
+        this->board[location.first][location.second-1]!=nullptr)
+        {
+            place.first=location.first;
+            place.second=location.second-1;
+            chosen=this->board[location.first][location.second]->act(this->board[place.first][place.second]);
+            if(this->board[place.first][place.second]->_points<=0){
+                this->board[place.first][place.second]=nullptr; 
+            }
+            cout<<"atacking to the left"<<endl;
+        }
+
         if(dir==1)
         one=true;
         else if(dir==2)
@@ -125,70 +187,6 @@ namespace WarGame{
         three=true;
         else if(dir==4)
         four=true;
-    
-
-        //cout<<"dir is: "<<dir<<endl;
-        //cout<<"before dir==1"<<endl;
-
-        if(dir==1 && location.first+1<board.size() && 
-        this->board[location.first+1][location.second]!=nullptr && 
-        this->board[location.first+1][location.second]->_player==other_player)
-        {
-            place.first=location.first+1;
-            place.second=location.second;
-            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
-            if(this->board[place.first][place.second]->_points<=0){
-                this->board[place.first][place.second]=nullptr; 
-            }
-            chosen=true;
-            cout<<"atacking upward"<<endl;
-        }
-
-
-        else if(dir==2 && location.first-1<board.size() && 
-        this->board[location.first-1][location.second]!=nullptr && 
-        this->board[location.first-1][location.second]->_player==other_player)
-        {
-            place.first=location.first-1;
-            place.second=location.second;
-            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
-              if(this->board[place.first][place.second]->_points<=0){
-                this->board[place.first][place.second]=nullptr; 
-            }
-            chosen=true;
-            cout<<"atacking downward"<<endl;
-        }
-
-
-        else if(dir==3 && location.second+1<board[0].size() && 
-        this->board[location.first][location.second+1]!=nullptr && 
-        //this[{location.first, location.second+1}]->_player==other_player)
-        this->board[location.first][location.second+1]->_player==other_player)
-        {
-            place.first=location.first;
-            place.second=location.second+1;
-            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
-            if(this->board[place.first][place.second]->_points<=0){
-                this->board[place.first][place.second]=nullptr; 
-            }
-            chosen=true;
-            cout<<"atacking to the right"<<endl;
-        }
-
-
-        else if(dir==4 && location.second-1<board[0].size() && 
-        this->board[location.first][location.second-1]!=nullptr && 
-        this->board[location.first][location.second-1]->_player==other_player)
-        {
-            place.first=location.first;
-            place.second=location.second-1;
-            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
-            if(this->board[place.first][place.second]->_points<=0){
-                this->board[place.first][place.second]=nullptr; 
-            }
-            chosen=true;
-            cout<<"atacking to the left"<<endl;
-        }
 
 
         if(one && two && three && four)
@@ -206,8 +204,7 @@ namespace WarGame{
         //cout<<"after soldier = this->board[location.first][location.second];"<<endl;
 
         if(soldier!=NULL && (soldier->_soltype==Soldier::soltype::footcom ||
-        soldier->_soltype==Soldier::soltype::paracom || 
-        soldier->_soltype==Soldier::soltype::snipercom)){
+        soldier->_soltype==Soldier::soltype::paracom)){
             //cout<<"soldier->_soltype==Soldier::soltype::footcom"<<endl;
 
             for(int i=0; i<board.size(); i++)
@@ -246,7 +243,67 @@ namespace WarGame{
 
         dir=(rand() % 4) + 1;
         
-        if(dir==1)
+       
+
+
+
+
+        if(dir==1 && !one && location.first+1<board.size() && 
+        this->board[location.first+1][location.second]!=nullptr)
+        {
+            place.first=location.first+1;
+            place.second=location.second;
+            chosen=this->board[location.first][location.second]->act(this->board[place.first][place.second]);
+            if(this->board[place.first][place.second]->_points<=0){
+                this->board[place.first][place.second]=nullptr; 
+            }
+            if(chosen)
+            cout<<"private attacking upward"<<endl;
+        }
+
+
+        if(dir==2 && !two && location.first-1<board.size() && 
+        this->board[location.first-1][location.second]!=nullptr)
+        {
+            place.first=location.first-1;
+            place.second=location.second;
+            chosen=this->board[location.first][location.second]->act(this->board[place.first][place.second]);
+            if(this->board[place.first][place.second]->_points<=0){
+                this->board[place.first][place.second]=nullptr; 
+            }
+            if(chosen)
+            cout<<"private attacking downward"<<endl;
+        }
+
+
+        else if(dir==3 && !three && location.second+1<board[0].size() && 
+        this->board[location.first][location.second+1]!=nullptr)
+        {
+            place.first=location.first;
+            place.second=location.second+1;
+            chosen=this->board[location.first][location.second]->act(this->board[place.first][place.second]);
+            if(this->board[place.first][place.second]->_points<=0){
+                this->board[place.first][place.second]=nullptr; 
+            }
+            if(chosen)
+            cout<<"private atacking to the right"<<endl;
+        }
+
+
+        else if(dir==4 && !four && location.second-1<board[0].size() && 
+        this->board[location.first][location.second-1]!=nullptr)
+        {
+            place.first=location.first;
+            place.second=location.second-1;
+            chosen=this->board[location.first][location.second]->act(this->board[place.first][place.second]);
+            if(this->board[place.first][place.second]->_points<=0){
+                this->board[place.first][place.second]=nullptr; 
+            }
+            if(chosen)
+            cout<<"private atacking to the left"<<endl;
+        }
+
+         if(dir==1)
         one=true;
         else if(dir==2)
         two=true;
@@ -256,80 +313,79 @@ namespace WarGame{
         four=true;
 
 
-
-        dir=rand() % 4 + 1;
-
-        if(dir==1 && location.first+1<board.size() && 
-        this->board[location.first+1][location.second]!=nullptr && 
-        this->board[location.first+1][location.second]->_player==other_player)
-        {
-            place.first=location.first+1;
-            place.second=location.second;
-            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
-            if(this->board[place.first][place.second]->_points<=0){
-                this->board[place.first][place.second]=nullptr; 
-            }
-            chosen=true;
-            cout<<"private attacking upward"<<endl;
-        }
-
-
-        if(dir==2 && location.first-1<board.size() && 
-        this->board[location.first-1][location.second]!=nullptr && 
-        this->board[location.first-1][location.second]->_player==other_player)
-        {
-            place.first=location.first-1;
-            place.second=location.second;
-            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
-            if(this->board[place.first][place.second]->_points<=0){
-                this->board[place.first][place.second]=nullptr; 
-            }
-            chosen=true;
-            cout<<"private attacking downward"<<endl;
-        }
-
-
-        else if(dir==3 && location.second+1<board[0].size() && 
-        this->board[location.first][location.second+1]!=nullptr && 
-        this->board[location.first][location.second+1]->_player==other_player)
-        {
-            place.first=location.first;
-            place.second=location.second+1;
-            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
-            if(this->board[place.first][place.second]->_points<=0){
-                this->board[place.first][place.second]=nullptr; 
-            }
-            chosen=true;
-            cout<<"private atacking to the right"<<endl;
-        }
-
-
-        else if(dir==4 && location.second-1<board[0].size() && 
-        this->board[location.first][location.second-1]!=nullptr && 
-        this->board[location.first][location.second-1]->_player==other_player)
-        {
-            place.first=location.first;
-            place.second=location.second-1;
-            this->board[location.first][location.second]->act(this->board[place.first][place.second]);
-            if(this->board[place.first][place.second]->_points<=0){
-                this->board[place.first][place.second]=nullptr; 
-            }
-            chosen=true;
-            cout<<"private atacking to the left"<<endl;
-        }
-
-
         if(one && two && three && four)
         allChosen=true;
 
-        dir=(rand() % 4) + 1;
-
+       
         
         }
 
 
 
 
+                }
+            }
+
+        }
+
+        }
+
+
+
+        else{
+            int i,j,k,l;
+            int maxi, maxj, maxk, maxl;
+            Soldier* goliath=NULL;
+            int maxpoints=0;
+            for(i=0; i<board.size(); i++)
+            for(j=0; j<board[0].size(); j++){
+                if(board[i][j]!=NULL && board[i][j]->_player==other_player &&
+                board[i][j]->_points>maxpoints){
+                    goliath=board[i][j];
+                    maxi=i;
+                    maxj=j;
+                    maxpoints=goliath->_points;
+                }
+            }
+            combatant->act(goliath);
+            cout<<"attacking goliath"<<endl;
+            if(goliath->_points<=0){
+                //delete(goliath);
+                cout<<"before first board[i][j]=nullptr"<<endl;
+                delete(board[maxi][maxj]);
+                board[maxi][maxj]=nullptr;
+                cout<<"after first board[i][j]=nullptr"<<endl;
+            }
+
+            if(combatant->_soltype==Soldier::soltype::snipercom){
+                Soldier* temper=NULL;
+                for(int i=0; i<board.size(); i++)
+                for(int j=0; j<board[0].size(); j++){
+                    if(board[i][j]!=NULL && board[i][j]->_player==player_number &&
+                    board[i][j]->_soltype==Soldier::soltype::sniper){
+                        combatant=board[i][j];
+                        goliath=NULL;
+                        maxpoints=0;
+                        for(k=0; k<board.size(); k++)
+                        for(l=0; l<board[0].size(); l++){
+                          if(board[k][l]!=NULL && board[k][l]->_player==other_player &&
+                              board[k][l]->_points>maxpoints){
+                              goliath=board[k][l];
+                              maxpoints=goliath->_points;
+                              maxk=k;
+                              maxl=l;
+                }
+
+            }
+                    combatant->act(goliath);
+                    if(goliath->_points<=0){
+                        //delete(goliath);
+                        cout<<"before board[k][l]=nullptr;"<<endl;
+                        board[maxk][maxl]=nullptr;
+                        delete(board[maxk][maxl]);
+                        cout<<"after board[k][l]=nullptr;"<<endl;
+                                    }
+                    }
                 }
             }
 

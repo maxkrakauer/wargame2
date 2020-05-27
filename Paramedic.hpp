@@ -15,7 +15,7 @@ class Paramedic: public Soldier{
 
    void reduce(Soldier* soldier);
 
-   void act(Soldier* soldier);
+   bool act(Soldier* soldier);
 
    void recover();
 

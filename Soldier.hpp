@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+using namespace std;
    
     class Soldier{
 
@@ -23,7 +24,9 @@
 
         public:
 
-        virtual void act(Soldier* soldier){};
+        virtual bool act(Soldier* soldier){
+            cout<<"virtual bool act(Soldier* soldier)"<<endl;
+            return false;};
 
         virtual void reduce(Soldier* soldier){};
 

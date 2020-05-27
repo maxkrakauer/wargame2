@@ -7,8 +7,13 @@
 
 
    
-   void FootSoldier::act(Soldier* soldier){
+   bool FootSoldier::act(Soldier* soldier){
+       if(soldier!=NULL && _player!=soldier->_player){
        reduce(soldier);
+       printf(" bool FootSoldier::act(Soldier* soldier){\n");
+       return true;
+       }
+       return false;
    }
 
    void FootSoldier::reduce(Soldier* soldier){

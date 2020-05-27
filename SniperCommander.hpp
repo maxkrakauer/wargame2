@@ -10,7 +10,7 @@ class SniperCommander: public Sniper{
         _points=120;
     }
 
-   void attack(Soldier* soldier);
+   bool act(Soldier* soldier);
 
    void reduce(Soldier* soldier);
 

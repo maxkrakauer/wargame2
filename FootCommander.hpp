@@ -10,7 +10,7 @@ class FootCommander: public FootSoldier{
         _points=150;
     }
 
-   void act(Soldier* soldier);
+   bool act(Soldier* soldier);
 
    void reduce(Soldier* soldier);
 

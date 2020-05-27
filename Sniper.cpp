@@ -4,11 +4,18 @@
 #include <vector>
 #include <stdexcept>
 #include "Sniper.hpp"
+#include <iostream>
+using namespace std;
 
 
    
-   void Sniper::act(Soldier* soldier){
+   bool Sniper::act(Soldier* soldier){
+       if(soldier!=NULL && _player!=soldier->_player){
        reduce(soldier);
+       printf(" bool Sniper::act(Soldier* soldier)");
+       return true;
+       }
+       return false;
    }
 
    void Sniper::reduce(Soldier* soldier){

@@ -10,8 +10,13 @@
 
 
    
-   void FootCommander::act(Soldier* soldier){
+   bool FootCommander::act(Soldier* soldier){
+       if(soldier!=NULL && _player!=soldier->_player){
        reduce(soldier);
+       printf("bool FootCommander::act(Soldier* soldier){\n");
+       return true;
+       }
+       return false;
    }
 
    void FootCommander::reduce(Soldier* soldier){

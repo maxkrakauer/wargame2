@@ -11,7 +11,7 @@ class Sniper: public Soldier{
       _points=100;
    }
 
-   void act(Soldier* soldier);
+   bool act(Soldier* soldier);
 
    void reduce(Soldier* soldier);
 

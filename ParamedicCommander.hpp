@@ -13,7 +13,7 @@ class ParamedicCommander: public Paramedic{
 
    void reduce(Soldier* soldier);
 
-   void act(Soldier* soldier);
+   bool act(Soldier* soldier);
 
    void recover();
 

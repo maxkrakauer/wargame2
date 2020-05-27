@@ -10,8 +10,13 @@
 
 
    
-   void SniperCommander::attack(Soldier* soldier){
+   bool SniperCommander::act(Soldier* soldier){
+       if(soldier!=NULL && _player!=soldier->_player){
        reduce(soldier);
+       printf(" bool SniperCommander::act(Soldier* soldier)");
+       return true;
+       }
+       return false;
    }
 
    void SniperCommander::reduce(Soldier* soldier){
