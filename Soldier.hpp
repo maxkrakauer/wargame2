@@ -13,6 +13,7 @@ using namespace std;
         int _player;
         soltype _soltype;
         int _points;
+        int _row, _col;
 
         public:
         Soldier(){}
@@ -20,19 +21,24 @@ using namespace std;
         Soldier(int player){
             _player=player;
             _soltype=soldier;
+            _row=-1;
+            _col=-1;
         }
 
         public:
 
-        virtual bool act(Soldier* soldier){
-            cout<<"virtual bool act(Soldier* soldier)"<<endl;
+        void setLocation(int r, int c){
+            _row=r;
+            _col=c;
+        }
+
+        virtual bool act(std::vector<std::vector<Soldier*>> &board){
+            cout<<"virtual bool act()"<<endl;
             return false;};
 
-        virtual void reduce(Soldier* soldier){};
+        virtual void reduce(Soldier* &soldier){};
 
         virtual void recover(){};
 
         
-
-       
     };
