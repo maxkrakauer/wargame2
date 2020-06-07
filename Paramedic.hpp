@@ -11,11 +11,11 @@ class Paramedic: public Soldier{
       _points=100;
    }
 
+   public:
    
-
    void reduce(Soldier* soldier);
 
-   bool act(Soldier* soldier);
+   bool act(std::vector<std::vector<Soldier*>> &board);
 
    void recover();
 

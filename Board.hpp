@@ -47,6 +47,9 @@ class Board {
     //      must be handled by polymorphism.
     void move(uint player_number, std::pair<int,int> source, MoveDIR direction);
 
+    
+
+
     // returns true iff the board contains one or more soldiers of the given player.
     bool has_soldiers(uint player_number) const;
     

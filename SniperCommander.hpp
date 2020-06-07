@@ -10,11 +10,14 @@ class SniperCommander: public Sniper{
         _points=120;
     }
 
-   bool act(Soldier* soldier);
+  
+   bool act(std::vector<std::vector<Soldier*>> &board);
 
-   void reduce(Soldier* soldier);
+   void reduce(Soldier* &soldier);
 
    void recover();
+
+   //std::pair<int,int> chooseEnemy(std::vector<std::vector<Soldier*>> &board);
 
     
 };
